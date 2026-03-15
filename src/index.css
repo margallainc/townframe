@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: auto; /* Required for Lenis smooth scrolling */
+  }
+
+  body {
+    @apply bg-luxury-black text-luxury-white font-sans overflow-x-hidden selection:bg-white selection:text-black;
+  }
+}
+
+@layer utilities {
+  .clip-text {
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .glass-panel {
+    @apply bg-glass backdrop-blur-md border border-luxury-border;
+  }
+}
+
+/* Custom hiding scrollbar for a cleaner canvas look while Lenis handles scroll */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
