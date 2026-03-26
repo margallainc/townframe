@@ -4,8 +4,8 @@ import { Quote } from 'lucide-react';
 const testimonials = [
   {
     quote: "Our conversion rate tripled within two weeks of launching the new Townframe site. It feels like we're a Fortune 500 company.",
-    author: "Sarah J.",
-    role: "Founder, Bloom & Co.",
+    author: "Waqas Ali",
+    role: "Owner, Galaxy Kitchen Cabinets Ltd.",
     delay: "md:mt-0"
   },
   {
