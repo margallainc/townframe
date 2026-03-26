@@ -9,7 +9,7 @@ export const ContactCard = () => {
     
     // Setup for Web3Forms (A public generic endpoint key is used here for demonstration)
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE"); // Replace with actual Web3Forms Key
+    formData.append("access_key", "a0452f3b-0639-4e65-a1b7-616370a17641");
     
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
