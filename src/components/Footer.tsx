@@ -8,13 +8,9 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <p className="tracking-wide leading-relaxed break-words text-center md:text-left">
           Townframe, a Margalla Inc. company · Calgary, AB ·{' '}
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 break-all">
-            TODO: &#123;&#123;phone&#125;&#125;
-          </span>
+          <a href="tel:+14039888659" className="text-white hover:text-amber-300 transition-colors font-medium">403-988-8659</a>
           {' '}·{' '}
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 break-all">
-            TODO: &#123;&#123;email&#125;&#125;
-          </span>
+          <a href="mailto:saadijaz@townframe.net" className="hover:text-white transition-colors break-all">saadijaz@townframe.net</a>
           {' '}· © {currentYear}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-500">
