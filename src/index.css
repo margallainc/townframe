@@ -7,10 +7,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: auto; /* Required for Lenis smooth scrolling */
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
     @apply bg-luxury-black text-luxury-white font-sans overflow-x-hidden selection:bg-white selection:text-black;
+    max-width: 100vw;
   }
 }
 

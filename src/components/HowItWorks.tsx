@@ -33,8 +33,9 @@ export const HowItWorks = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cards = gsap.utils.toArray('.how-card');
-    cards.forEach((card: any, i) => {
+    if (typeof window === 'undefined') return;
+    const cards = gsap.utils.toArray<Element>('.how-card');
+    cards.forEach((card, i) => {
       gsap.fromTo(
         card,
         { y: 40, opacity: 0 },

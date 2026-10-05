@@ -3,7 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Check } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const features = [
   'Custom website (free build — no upfront cost)',
@@ -17,6 +19,7 @@ const features = [
 
 export const Pricing = () => {
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const card = document.querySelector('.pricing-card');
     if (!card) return;
     gsap.fromTo(
@@ -53,7 +56,7 @@ export const Pricing = () => {
 
         {/* Single Card */}
         <div
-          className="pricing-card relative rounded-2xl p-12 border bg-luxury-white text-luxury-black border-luxury-white shadow-[0_0_80px_rgba(255,255,255,0.10)]"
+          className="pricing-card relative rounded-2xl p-8 md:p-12 border bg-luxury-white text-luxury-black border-luxury-white shadow-[0_0_80px_rgba(255,255,255,0.10)]"
         >
           <div className="mb-10">
             <p className="text-sm font-semibold tracking-widest uppercase mb-4 text-gray-500">
@@ -87,6 +90,7 @@ export const Pricing = () => {
 
           <button
             onClick={() => {
+              if (typeof window === 'undefined') return;
               const el = document.getElementById('contact');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,23 +7,48 @@ import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
 import { PortfolioMosaic } from './components/PortfolioMosaic';
 import { Pricing } from './components/Pricing';
-import { Testimonials } from './components/Testimonials';
+import { RecentWork } from './components/RecentWork';
 import { ContactCard } from './components/ContactCard';
+import { ContractorsPage } from './components/ContractorsPage';
+import { Footer } from './components/Footer';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-function App() {
+interface AppProps {
+  path?: string;
+}
+
+export function App({ path }: AppProps) {
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    if (path) return path;
+    if (typeof window !== 'undefined') {
+      return window.location.pathname.replace(/\/$/, '') || '/';
+    }
+    return '/';
+  });
+
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis for smooth scroll "infinite canvas" feel
+    if (typeof window === 'undefined') return;
+
+    // Sync path on popstate (browser back/forward)
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname.replace(/\/$/, '') || '/');
+    };
+    window.addEventListener('popstate', handlePopState);
+
+    // Initialize Lenis
+    const isMobile = window.innerWidth < 768;
     const lenis = new Lenis({
-      duration: 1.8,
+      duration: isMobile ? 1.0 : 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1.5,
     });
     
     lenisRef.current = lenis;
@@ -33,79 +58,60 @@ function App() {
       requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    const animId = requestAnimationFrame(raf);
 
-    // Cinematic Section Transitions & Blurs
-    const sections = document.querySelectorAll('.page-section');
-    
-    sections.forEach((section) => {
-      // Zoom-out transition
-      gsap.fromTo(section, 
-        { scale: 1.05, filter: 'blur(10px)', opacity: 0.8 },
-        { 
-          scale: 1, 
-          filter: 'blur(0px)', 
-          opacity: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'top center',
-            scrub: true,
+    // Section transitions for desktop
+    if (!isMobile) {
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach((section) => {
+        gsap.fromTo(section, 
+          { scale: 1.03, filter: 'blur(6px)', opacity: 0.85 },
+          { 
+            scale: 1, 
+            filter: 'blur(0px)', 
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'top center',
+              scrub: true,
+            }
           }
-        }
-      );
-
-      // Exit transition — fromTo so scrub reversal returns to the clean state
-      gsap.fromTo(section,
-        { filter: 'blur(0px)', opacity: 1, scale: 1 },
-        {
-          filter: 'blur(10px)',
-          opacity: 0.8,
-          scale: 0.98,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'bottom center',
-            end: 'bottom top',
-            scrub: true,
-          }
-        }
-      );
-    });
+        );
+      });
+    }
 
     return () => {
+      window.removeEventListener('popstate', handlePopState);
+      cancelAnimationFrame(animId);
       lenis.destroy();
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, []);
+  }, [currentPath]);
+
+  const isContractors = currentPath === '/contractors' || currentPath === '/contractors/';
 
   return (
-    <div className="relative bg-luxury-black text-luxury-white w-full overflow-hidden font-sans pb-20">
-      
-      {/* 3D Spline Canvas Placeholder (Future Integration) */}
-      <div 
-        id="spline-canvas-layer" 
-        className="fixed inset-0 z-0 pointer-events-none opacity-30"
-      >
-        {/* Spline code will be attached here */}
-      </div>
-
-      <Navigation />
+    <div className="relative bg-luxury-black text-luxury-white w-full overflow-hidden font-sans">
+      <Navigation currentPath={currentPath} />
       
       <main className="relative z-10">
-        <div className="page-section"><Hero /></div>
-        <div className="page-section"><HowItWorks /></div>
-        <div className="page-section"><PortfolioMosaic /></div>
-        <div className="page-section"><Pricing /></div>
-        <div className="page-section"><Testimonials /></div>
-        <div className="page-section"><ContactCard /></div>
+        {isContractors ? (
+          <ContractorsPage />
+        ) : (
+          <>
+            <div className="page-section"><Hero /></div>
+            <div className="page-section"><HowItWorks /></div>
+            <div className="page-section"><PortfolioMosaic /></div>
+            <div className="page-section"><Pricing /></div>
+            <div className="page-section"><RecentWork id="recent-work" /></div>
+            <div className="page-section"><ContactCard /></div>
+          </>
+        )}
       </main>
 
-      {/* Footer */}
-      <footer className="py-16 text-center relative z-10 text-gray-500 font-light text-sm border-t border-luxury-border">
-        <p className="tracking-wide">© {new Date().getFullYear()} Townframe. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
