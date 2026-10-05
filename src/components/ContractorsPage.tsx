@@ -9,8 +9,7 @@ import {
   BarChart3, 
   ChevronDown, 
   ChevronUp, 
-  HardHat, 
-  User 
+  HardHat
 } from 'lucide-react';
 import { Pricing } from './Pricing';
 import { RecentWork } from './RecentWork';
@@ -288,21 +287,9 @@ export const ContractorsPage = () => {
       <section id="about" className="py-24 relative bg-black/50 border-t border-luxury-border">
         <div className="max-w-5xl mx-auto px-6">
           <div className="glass-panel p-8 md:p-14 rounded-3xl border border-white/10 bg-white/[0.02] relative overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-              
-              {/* Photo Slot */}
-              <div className="md:col-span-4 flex flex-col items-center">
-                <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group shadow-xl">
-                  <User className="w-16 h-16 text-gray-600 mb-2" />
-                  <div className="p-2 rounded bg-amber-500/20 border border-amber-500/40 text-[11px] font-mono text-amber-300">
-                    TODO: &#123;&#123;photo file, or leave a placeholder&#125;&#125;
-                  </div>
-                </div>
-                <p className="text-xs text-gray-500 font-mono mt-3">Saad Ijaz · Founder</p>
-              </div>
-
+            <div>
               {/* Bio Copy */}
-              <div className="md:col-span-8 space-y-5">
+              <div className="space-y-5">
                 <span className="text-xs uppercase tracking-widest text-amber-400 font-mono font-medium">
                   Background
                 </span>
@@ -317,6 +304,7 @@ export const ContractorsPage = () => {
                     I know how jobs get won: a fast response, a clear scope, and trust. Your website should do the same. Based in Calgary.
                   </p>
                 </div>
+                <p className="text-xs text-gray-500 font-mono">Saad · Founder</p>
               </div>
 
             </div>
