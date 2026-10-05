@@ -24,10 +24,6 @@ export const ContactCard = () => {
     setStatus('Submitting...');
     setIsSuccess(false);
     
-    // Web3Forms endpoint & access key
-    formData.append("access_key", "a0452f3b-0639-4e65-a1b7-616370a17641");
-    formData.append("subject", "New Website Inquiry - Townframe Homepage");
-    
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -70,9 +66,7 @@ export const ContactCard = () => {
             <div className="flex items-center gap-2">
               <Phone className="w-4 h-4 text-amber-400" />
               <span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                  TODO: &#123;&#123;phone&#125;&#125;
-                </span>
+                <a href="tel:+14039888659" className="text-white hover:text-amber-300 transition-colors font-medium">403-988-8659</a>
                 {' '}(tap to call)
               </span>
             </div>
@@ -83,7 +77,9 @@ export const ContactCard = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form method="post" action="https://api.web3forms.com/submit" onSubmit={handleSubmit} className="space-y-6">
+            <input type="hidden" name="access_key" value="a0452f3b-0639-4e65-a1b7-616370a17641" />
+            <input type="hidden" name="subject" value="New Website Inquiry - Townframe Homepage" />
             {/* Honeypot field */}
             <input 
               type="text" 

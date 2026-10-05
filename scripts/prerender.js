@@ -54,7 +54,7 @@ async function prerender() {
       "@type": "ProfessionalService",
       "name": "Townframe",
       "areaServed": "Calgary",
-      "telephone": "{{phone}}",
+      "telephone": "+1-403-988-8659",
       "url": "https://townframe.ca",
       "description": page.schemaDescription
     };

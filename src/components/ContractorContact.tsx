@@ -21,11 +21,6 @@ export const ContractorContact = () => {
     setStatus('submitting');
     setErrorMessage('');
 
-    // Web3Forms access key
-    formData.append("access_key", "a0452f3b-0639-4e65-a1b7-616370a17641");
-    formData.append("subject", "New Calgary Contractor Quote Request - Townframe");
-    formData.append("from_name", "Townframe Contractor Form");
-
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -75,9 +70,7 @@ export const ContractorContact = () => {
                 <div>
                   <p className="text-xs text-gray-500 font-mono uppercase tracking-wider">Tap to Call</p>
                   <div className="mt-0.5">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                      TODO: &#123;&#123;phone&#125;&#125;
-                    </span>
+                    <a href="tel:+14039888659" className="text-white hover:text-amber-300 transition-colors font-medium">403-988-8659</a>
                   </div>
                 </div>
               </div>
@@ -105,7 +98,10 @@ export const ContractorContact = () => {
           <div className="lg:col-span-7">
             <div className="glass-panel p-8 md:p-10 rounded-3xl border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-xl">
               
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form method="post" action="https://api.web3forms.com/submit" onSubmit={handleSubmit} className="space-y-5">
+                <input type="hidden" name="access_key" value="a0452f3b-0639-4e65-a1b7-616370a17641" />
+                <input type="hidden" name="subject" value="New Calgary Contractor Quote Request - Townframe" />
+                <input type="hidden" name="from_name" value="Townframe Contractor Form" />
                 {/* Honeypot field (hidden from real users, caught by bots) */}
                 <input 
                   type="text" 

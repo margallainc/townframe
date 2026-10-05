@@ -19,7 +19,7 @@ export const RecentWork = ({ id = "recent-work", isContractorsPage = false }: Re
           </h2>
           <p className="text-gray-400 font-light text-sm sm:text-base md:text-lg max-w-xl mx-auto">
             {isContractorsPage 
-              ? "Real custom website builds delivered for Calgary trade and fabrication businesses." 
+              ? "A recent build for a Calgary cabinetry business." 
               : "A recent project delivered for a local Calgary business."}
           </p>
         </div>

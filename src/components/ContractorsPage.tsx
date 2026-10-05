@@ -51,7 +51,7 @@ export const ContractorsPage = () => {
     {
       icon: Smartphone,
       title: "Mobile-First, Fast-Loading & SSL",
-      description: "Built for the 70%+ of homeowners searching on their phones. Fast loads, zero lag, secure HTTPS certificate included."
+      description: "Built for homeowners who search on their phones. Fast loads, zero lag, secure HTTPS certificate included."
     },
     {
       icon: BarChart3,
